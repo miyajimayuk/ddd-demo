@@ -4,18 +4,12 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 import javax.validation.constraints.Min
 
-@Suppress("DEPRECATION")
-open class LongNumber @Deprecated("user deserialize") constructor(
-    @Deprecated("user toPrimitive")
+open class LongNumber @JsonCreator(mode = JsonCreator.Mode.DELEGATING) constructor(
     @field: Min(0)
     open val value: Long
 ) {
     @JsonValue
-    open fun toPrimitive(): Long = value
+    open fun show(): Long = serialize()
+    open fun serialize(): Long = value
 
-    companion object {
-        @JsonCreator
-        @JvmStatic
-        fun deserialize(value: Long?): LongNumber? = value?.let { LongNumber(it) }
-    }
 }

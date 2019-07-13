@@ -6,14 +6,14 @@ import app.context.event.type.Title
 
 class EventFactory {
     fun create(
-        id: EventId?,
-        title: Title?,
-        content: Content?
+        id: Long,
+        title: String,
+        content: String
     ): Event {
         return Event(
-            id = id,
-            title = title,
-            content = content
+            id = EventId(id),
+            title = Title(title),
+            content = Content(content)
         )
     }
 

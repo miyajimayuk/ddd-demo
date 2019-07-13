@@ -1,7 +1,6 @@
 package app.controller.api
 
 import app.context.event.EventService
-import app.context.event.type.EventId
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping

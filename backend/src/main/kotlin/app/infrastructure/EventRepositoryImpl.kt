@@ -13,12 +13,12 @@ import org.springframework.stereotype.Repository
 class EventRepositoryImpl(
     private val eventEntityDao: EventEntityDao
 ): EventRepository {
-    override fun getBy(id: EventId): Event? {
-        val event = eventEntityDao.selectById(id.toPrimitive())
+    override fun getBy(id: EventId): Event {
+        val event = eventEntityDao.selectById(id.serialize())
         return EventFactory().create(
-            id = EventId.deserialize(event.id),
-            title = Title.deserialize(event.title),
-            content = Content.deserialize(event.content)
+            id = event.id,
+            title = event.title,
+            content = event.content
         )
     }
 }

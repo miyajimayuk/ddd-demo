@@ -6,16 +6,13 @@ import com.fasterxml.jackson.annotation.JsonValue
 import javax.validation.constraints.Size
 
 @Suppress("DEPRECATION")
-data class Content @Deprecated("use deserialize") constructor(
+data class Content @JsonCreator(mode = JsonCreator.Mode.DELEGATING) constructor(
     override val value: String
-): LongText(value) {
+) : LongText(value) {
 
     @JsonValue
-    override fun toPrimitive(): String = value
+    override fun show(): String = serialize()
 
-    companion object {
-        @JsonCreator
-        @JvmStatic
-        fun deserialize(value: String?): Content? = value?.let { Content(it) }
-    }
+    override fun serialize(): String = value
+
 }
